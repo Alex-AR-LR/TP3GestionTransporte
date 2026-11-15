@@ -1,0 +1,69 @@
+@host = http://localhost:3000/api
+@token = PEGAR_TOKEN_AQUI
+
+### Listar todos (incluye total_km)
+GET {{host}}/viajes
+Authorization: Bearer {{token}}
+
+### Historial por vehículo
+GET {{host}}/viajes?vehiculo_id=1
+Authorization: Bearer {{token}}
+
+### Historial por conductor
+GET {{host}}/viajes?conductor_id=1
+Authorization: Bearer {{token}}
+
+### Filtro inválido (400)
+GET {{host}}/viajes?vehiculo_id=abc
+Authorization: Bearer {{token}}
+
+### Registrar viaje
+POST {{host}}/viajes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "vehiculo_id": 1,
+  "conductor_id": 1,
+  "fecha_salida": "2026-11-10",
+  "fecha_llegada": "2026-11-11",
+  "origen": "La Rioja",
+  "destino": "Córdoba",
+  "kilometros": 430,
+  "observaciones": "Sin novedades"
+}
+
+### Vehículo inexistente (404)
+POST {{host}}/viajes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "vehiculo_id": 9999,
+  "conductor_id": 1,
+  "fecha_salida": "2026-11-10",
+  "fecha_llegada": "2026-11-11",
+  "origen": "La Rioja",
+  "destino": "Córdoba",
+  "kilometros": 430
+}
+
+### Actualizar viaje
+PUT {{host}}/viajes/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "vehiculo_id": 1,
+  "conductor_id": 1,
+  "fecha_salida": "2026-11-10",
+  "fecha_llegada": "2026-11-12",
+  "origen": "La Rioja",
+  "destino": "Córdoba",
+  "kilometros": 450,
+  "observaciones": "Demora por clima"
+}
+
+### Eliminar viaje
+DELETE {{host}}/viajes/1
+Authorization: Bearer {{token}}
