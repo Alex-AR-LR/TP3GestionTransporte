@@ -1,0 +1,39 @@
+@host = http://localhost:3000/api
+
+### Registro
+POST {{host}}/auth/register
+Content-Type: application/json
+
+{
+  "nombre": "Ale",
+  "email": "ale@mail.com",
+  "password": "123456"
+}
+
+### Login (copiar el token a los otros archivos .http)
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "ale@mail.com",
+  "password": "123456"
+}
+
+### Login con credenciales incorrectas (401)
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "ale@mail.com",
+  "password": "mala"
+}
+
+### Registro con datos inválidos (400)
+POST {{host}}/auth/register
+Content-Type: application/json
+
+{
+  "nombre": "",
+  "email": "no-es-email",
+  "password": "1"
+}
