@@ -1,0 +1,53 @@
+@host = http://localhost:3000/api
+@token = PEGAR_TOKEN_AQUI
+
+### Listar
+GET {{host}}/conductores
+Authorization: Bearer {{token}}
+
+### Obtener uno
+GET {{host}}/conductores/1
+Authorization: Bearer {{token}}
+
+### Crear
+POST {{host}}/conductores
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "numero_documento": "30111222",
+  "numero_licencia": "LIC-0001",
+  "fecha_alta_licencia": "2020-03-15",
+  "fecha_vencimiento_licencia": "2030-03-15"
+}
+
+### Crear con datos inválidos (400)
+POST {{host}}/conductores
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nombre": "",
+  "fecha_alta_licencia": "2030-01-01",
+  "fecha_vencimiento_licencia": "2020-01-01"
+}
+
+### Actualizar
+PUT {{host}}/conductores/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "numero_documento": "30111222",
+  "numero_licencia": "LIC-0001",
+  "fecha_alta_licencia": "2020-03-15",
+  "fecha_vencimiento_licencia": "2031-03-15"
+}
+
+### Eliminar
+DELETE {{host}}/conductores/1
+Authorization: Bearer {{token}}

@@ -1,0 +1,58 @@
+@host = http://localhost:3000/api
+@token = PEGAR_TOKEN_AQUI
+
+### Listar
+GET {{host}}/vehiculos
+Authorization: Bearer {{token}}
+
+### Sin token (401)
+GET {{host}}/vehiculos
+
+### Obtener uno
+GET {{host}}/vehiculos/1
+Authorization: Bearer {{token}}
+
+### Crear
+POST {{host}}/vehiculos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "marca": "Mercedes-Benz",
+  "modelo": "Sprinter",
+  "patente": "AB123CD",
+  "anio": 2022,
+  "capacidad_carga": 1500
+}
+
+### Crear con datos inválidos (400)
+POST {{host}}/vehiculos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "marca": "",
+  "anio": 1800,
+  "capacidad_carga": -5
+}
+
+### Actualizar
+PUT {{host}}/vehiculos/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "marca": "Mercedes-Benz",
+  "modelo": "Sprinter 515",
+  "patente": "AB123CD",
+  "anio": 2023,
+  "capacidad_carga": 1800
+}
+
+### No existe (404)
+GET {{host}}/vehiculos/9999
+Authorization: Bearer {{token}}
+
+### Eliminar
+DELETE {{host}}/vehiculos/1
+Authorization: Bearer {{token}}
